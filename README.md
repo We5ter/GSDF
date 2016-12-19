@@ -1,0 +1,2 @@
+# GoogleSSLdomainFinder
+基于谷歌透明证书的子域名列举脚本
