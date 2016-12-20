@@ -35,9 +35,11 @@ class Color:
 
 #查找域名
 class Domain:
-    def __init__(self,domain,Token):
+    def __init__(self,domain):
         self.domain = domain
-        self.Token = Token
+        self.Token = 'CAA='
+        self.ds = []
+        self.count = 0
         self.baseUrl = 'https://www.google.com/transparencyreport/jsonp/ct/search?incl_exp=true&incl_sub=true&c=jsonp'
         self.proxies = {
             'http': 'http://127.0.0.1:8087',
@@ -46,23 +48,26 @@ class Domain:
         requests.packages.urllib3.disable_warnings()
 
     def get_domain(self):
-        r = requests.get(self.baseUrl+'&domain='+self.domain+'&token='+self.Token, proxies=self.proxies,verify=False)
-        # print r.text
-        pattern = re.compile(r"jsonp\((.*)\)", re.I|re.X)
-        match = pattern.findall(r.text)
-        obj = json.loads(match[0])
-        #self.Token = obj["nextPageToken"]
-        return obj['results']
+        while 1:
+            r = requests.get(self.baseUrl+'&domain='+self.domain+'&token='+self.Token, proxies=self.proxies,verify=False)
+            # print r.text
+            pattern = re.compile(r"jsonp\((.*)\)", re.I|re.X)
+            match = pattern.findall(r.text)
+            obj = json.loads(match[0])
+            self.ds.append(obj['results'])
+            self.count = obj['numResults']
+            if hasattr(a, 'nextPageToken'):
+                self.Token = obj['nextPageToken']
+            else:
+                break
 
     def run(self):
         try:
-            print self.get_domain()
-        except KeyboardInterrupt:
-            print "Ctrl-c pressed ..."
-            sys.exit(1)
+            self.get_domain()
+            print self.count
+            print self.ds
         except:
-            print '未获取到SSL证书记录'
-            sys.exit(1)
+            print 'error'
 
 
 #命令行交互
@@ -72,7 +77,7 @@ class Main(cmd.Cmd):
 
  Site:https://lightrains.org
  help - 打开本帮助
- find + domain - 列举子域名,-c 显示归类的域名及证书列表，默认不显示
+ find + domain - 列举子域名
  cls - 清空屏幕
 
         '''
@@ -81,7 +86,7 @@ class Main(cmd.Cmd):
         reload(sys)
         sys.setdefaultencoding('utf-8')
         self.prompt = "domainFinder by Wester>>"
-        self.intro = "Welocome to GoogleSSLdomainFinder wrote by Wester(site:https://lightrains.org)!\nPlease print 'help' to start,Enjoy!"
+        self.intro = "Welcome to GoogleSSLdomainFinder wrote by Wester(site:https://lightrains.org)!\nPlease print 'help' to start,Enjoy!"
     def do_EOF(self, line):
         return True
 
@@ -90,7 +95,7 @@ class Main(cmd.Cmd):
 
     def do_find(self, line):
         domain = line
-        d = Domain(domain,'CAA=')
+        d = Domain(domain)
         d.run()
 
     def do_cls(self, line):
@@ -107,7 +112,7 @@ if '__main__' == __name__:
         print "Ctrl-c pressed ..."
         sys.exit(1)
     except:
-        print '程序运行出现未知错误,重新开启中...\n如需终止程序请再次按键ctrl+c'
+        print '运行出错，请重试'
         reload(sys)
         n = Main()
         n.cmdloop()
