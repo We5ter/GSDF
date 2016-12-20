@@ -56,7 +56,7 @@ class Domain:
             obj = json.loads(match[0])
             self.ds.append(obj['results'])
             self.count = obj['numResults']
-            if hasattr(a, 'nextPageToken'):
+            if hasattr(obj, 'nextPageToken'):
                 self.Token = obj['nextPageToken']
             else:
                 break
@@ -65,7 +65,9 @@ class Domain:
         try:
             self.get_domain()
             print self.count
-            print self.ds
+            #print type(self.ds)
+            for x in self.ds[0]:
+                print x['subject']
         except:
             print 'error'
 
