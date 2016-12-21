@@ -1,0 +1,11 @@
+uis.uestc.edu.cn
+webpac.uestc.edu.cn
+ioatest.uestc.edu.cn
+mail.uestc.edu.cn
+idas.uestc.edu.cn
+ostec.uestc.edu.cn
+www.uestc.edu.cn
+epay.uestc.edu.cn
+yst.uestc.edu.cn
+smilelab.uestc.edu.cn
+*.uestc.edu.cn
