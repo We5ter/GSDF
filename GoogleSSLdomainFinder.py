@@ -55,7 +55,6 @@ class Domain:
         self.domain = domain
         self.Token = Token
         self.ds = []
-        self.count = 0
         self.baseUrl = 'https://www.google.com/transparencyreport/jsonp/ct/search?incl_exp=true&incl_sub=true&c=jsonp'
         self.proxies = {
             'http': 'http://127.0.0.1:8087',
@@ -70,8 +69,6 @@ class Domain:
         match = pattern.findall(r.text)
         obj = json.loads(match[0])
         self.ds.append(obj['results'])
-        if self.count == 0:
-            self.count = obj['numResults']
         if 'nextPageToken' in obj.keys():
             self.Token = obj['nextPageToken']
             self.get_domain()
@@ -80,10 +77,8 @@ class Domain:
     def run(self):
         try:
             c = Colored()
-            print c.red('执行查询中，请稍候...')
+            print c.green('执行查询中，请稍候...')
             self.get_domain()
-            print c.green('\n\n共有'+str(self.count)+'条子域名记录:\n\n')
-            print '-'*70
             x = 0
             domains = []
             while (x<len(self.ds)):
@@ -92,17 +87,30 @@ class Domain:
                 x +=1
             # 去重处理
             domains = list(set(domains))
-            # 按表格形式输出
+
+            print c.green('\n\n共有'+str(len(domains))+'条子域名记录:\n\n')
+            # 按表格形式输出结果
             z = 0
             width = 20
-            while z <(len(domains)/3+1):
-                print "{} | {} | {}".format(domains[z].ljust(width),domains[z+1].ljust(width),domains[z+2].ljust(width))
-                print '-'*70
-                z +=3
+            if len(domains)>3:
+                print '-'*(width*3+10)
+                while z <(len(domains)/3+1):
+                    print "{0} | {1} | {2}".format(c.fuchsia("{}"), c.cyan("{}"),
+                                                   c.yellow("{}")).format(domains[z].ljust(width),
+                                                                         domains[z + 1].ljust(width),
+                                                                         domains[z + 2].ljust(width))
+                    print '-'*(width*3+10)
+                    z +=3
+            else:
+                while z <(len(domains)):
+                    print '-'*(width+5)
+                    print "{0}".format(c.fuchsia("{}")).format(domains[z].ljust(width))
+                    print '-'*(width+5)
+                    z +=1
             print '\n\n'
 
         except:
-            print '程序部分执行出现异常'
+            print c.red('程序部分执行出现异常')
 
 
 #命令行交互
@@ -118,10 +126,11 @@ class Main(cmd.Cmd):
         '''
     def __init__(self):
         cmd.Cmd.__init__(self)
+        co = Colored()
         reload(sys)
         sys.setdefaultencoding('utf-8')
-        self.prompt = "domainFinder[at]Wester>>"
-        self.intro = "Welcome to GoogleSSLdomainFinder wrote by Wester(site:https://lightrains.org)!\nPlease print 'help' to start,Enjoy!"
+        self.prompt = co.green("domainFinder[at]Wester =>")
+        self.intro = "\n\nWelcome to "+co.fuchsia("GoogleSSLdomainFinder")+" wrote by Wester("+co.yellow("blog:https://lightrains.org")+")!\n\nPlease print "+co.red('help')+" to start,Enjoy!\n\n"
     def do_EOF(self, line):
         return True
 
