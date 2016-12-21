@@ -109,6 +109,7 @@ class Domain:
 
                     print '-'*(width*3+10)
                     z +=3
+                print '\n\n'
             else:
                 if not (len(domains) ==0):
                     print c.green('\n\n共有'+str(len(domains))+'条子域名记录:\n\n')
@@ -117,9 +118,9 @@ class Domain:
                         print "{0}".format(c.fuchsia("{}")).format(domains[z].ljust(width))
                         print '-'*(width+5)
                         z +=1
+                    print '\n\n'
                 else:
                     print c.red('未查询到子域名记录，请稍后重试...')
-            print '\n\n'
 
         except KeyboardInterrupt:
             print "检测到Ctrl-c按键，正在退出"
