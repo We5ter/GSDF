@@ -77,7 +77,7 @@ class Domain:
     def run(self):
         try:
             c = Colored()
-            print c.green('\n查询中，结果集可能较大，导致耗时较长，请耐心稍候...')
+            print c.green('\n查询中，结果集可能较大，导致耗时较长，请耐心等待...')
             self.get_domain()
             x = 0
             domains = []
