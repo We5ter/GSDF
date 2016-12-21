@@ -4,6 +4,9 @@
 ####简要介绍
 GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transparencyreport/" target="_blank">谷歌透明证书查询</a>的python脚本，而使用谷歌透明证书查询子域名准确率较高，但是也存在部分子域名被漏掉的不足，可在一定程度上协助渗透测试，此外，此项目也是 @CNSISMO 开发中的某项目模块。
 
+####更迭记录
+- 2016.12.21 0.9.6版本，增加文件记录功能
+
 ####使用方法
 
 - 首先确保电脑已经安装上python 2.7或者更高版本
@@ -35,6 +38,3 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 ####维护信息
 - &copy;2016 Wester@CNSISMO
 - 作者blog:<a href="https://lightrains.org" target="_blank">https://lightrains.org</a>
-
-####更迭记录
-- 2016.12.21 0.9.6版本，增加文件记录功能
