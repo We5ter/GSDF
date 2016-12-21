@@ -122,7 +122,7 @@ class Domain:
             print '\n\n'
 
         except KeyboardInterrupt:
-            print "检测到Ctrl-c按键"
+            print "检测到Ctrl-c按键，正在退出"
             sys.exit(1)
         except:
             print c.red('您所查询域名结果较多，耗时过长，可能已经断开连接')
@@ -176,8 +176,8 @@ class Main(cmd.Cmd):
 
     def do_cls(self, line):
         os.system("clear")
-        
-    def do_exit(self):
+
+    def do_exit(self,line):
         sys.exit(-1)
 
 
@@ -188,10 +188,7 @@ if '__main__' == __name__:
         m = Main()
         m.cmdloop()
     except KeyboardInterrupt:
-        print "检测到Ctrl-c按键"
+        print "检测到Ctrl-c按键,正在退出"
         sys.exit(1)
     except:
-        print '部分程序执行出错，已为您重启程序'
-        reload(sys)
-        n = Main()
-        n.cmdloop()
+        exit()
