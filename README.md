@@ -11,8 +11,8 @@ GoogleSSLdomainFinder是为方便使用[谷歌透明证书查询](https://www.go
 <pre><code>下载https://codeload.github.com/XX-net/XX-Net/zip/3.2.7=>解压=>运行start.vbs(windows)/start(unix/linux)=>导入浏览器插件和证书=>等待xx-net扫描IP完成,大概30分钟左右
 </code></pre>
 - 请保证xx-net运行在127.0.0.1:8087,可访问127.0.0.1:8085查看
-- 下载[本脚本](https://github.com/We5ter/GoogleSSLdomainFinder/archive/master.zip)，解压
-- 运行前请保证xx-net持续运行，进入解压后目录，运行`python GoogleSSLdomainFinder.py`
+- 下载[本脚本](https://github.com/We5ter/GoogleSSLdomainFinder/archive/master.zip)，解压并进入解压后的目录
+- 运行`python GoogleSSLdomainFinder.py`，运行中请保证xx-net持续运行
 
 ####运行效果图
 
