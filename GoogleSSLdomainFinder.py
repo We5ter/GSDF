@@ -7,31 +7,47 @@ import json
 import os,cmd,sys
 
 #文本高亮
-class Color:
-    def __init__(self, msg):
-        self.msg = ''
-        self.msg = msg
-        self.HEADER = '\033[95m'
-        self.OKBLUE = '\033[94m'
-        self.OKGREEN = '\033[92m'
-        self.WARNING = '\033[93m'
-        self.FAIL = '\033[91m'
-        self.ENDC = '\033[0m'
-        self.BOLD = "\033[1m"
+class Colored(object):
+    # 显示格式: \033[显示方式;前景色;背景色m
+    # 只写一个字段表示前景色,背景色默认
+    RED = '\033[31m'       # 红色
+    GREEN = '\033[32m'     # 绿色
+    YELLOW = '\033[33m'    # 黄色
+    BLUE = '\033[34m'      # 蓝色
+    FUCHSIA = '\033[35m'   # 紫红色
+    CYAN = '\033[36m'      # 青蓝色
+    WHITE = '\033[37m'     # 白色
 
-    def infog(self):
+    #: no color
+    RESET = '\033[0m'      # 终端默认颜色
 
-        print self.OKGREEN + self.msg + self.ENDC
+    def color_str(self, color, s):
+        return '{}{}{}'.format(
+            getattr(self, color),
+            s,
+            self.RESET
+        )
 
-    def info(self):
-        print self.OKBLUE + self.msg + self.ENDC
+    def red(self, s):
+        return self.color_str('RED', s)
 
-    def warn(self):
-        print self.WARNING + self.msg + self.ENDC
+    def green(self, s):
+        return self.color_str('GREEN', s)
 
-    def err(self):
-        print self.FAIL + self.msg + self.ENDC
+    def yellow(self, s):
+        return self.color_str('YELLOW', s)
 
+    def blue(self, s):
+        return self.color_str('BLUE', s)
+
+    def fuchsia(self, s):
+        return self.color_str('FUCHSIA', s)
+
+    def cyan(self, s):
+        return self.color_str('CYAN', s)
+
+    def white(self, s):
+        return self.color_str('WHITE', s)
 
 #查找域名
 class Domain:
@@ -63,9 +79,11 @@ class Domain:
 
     def run(self):
         try:
-            print '执行查询中，请稍候...'
+            c = Colored()
+            print c.red('执行查询中，请稍候...')
             self.get_domain()
-            print '共有'+str(self.count)+'条子域名记录'
+            print c.green('\n\n共有'+str(self.count)+'条子域名记录:\n\n')
+            print '-'*70
             x = 0
             domains = []
             while (x<len(self.ds)):
@@ -74,11 +92,17 @@ class Domain:
                 x +=1
             # 去重处理
             domains = list(set(domains))
-            for z in domains:
-                print z
+            # 按表格形式输出
+            z = 0
+            width = 20
+            while z <(len(domains)/3+1):
+                print "{} | {} | {}".format(domains[z].ljust(width),domains[z+1].ljust(width),domains[z+2].ljust(width))
+                print '-'*70
+                z +=3
+            print '\n\n'
 
         except:
-            print 'error'
+            print '程序部分执行出现异常'
 
 
 #命令行交互
@@ -96,7 +120,7 @@ class Main(cmd.Cmd):
         cmd.Cmd.__init__(self)
         reload(sys)
         sys.setdefaultencoding('utf-8')
-        self.prompt = "domainFinder by Wester>>"
+        self.prompt = "domainFinder[at]Wester>>"
         self.intro = "Welcome to GoogleSSLdomainFinder wrote by Wester(site:https://lightrains.org)!\nPlease print 'help' to start,Enjoy!"
     def do_EOF(self, line):
         return True
@@ -123,7 +147,7 @@ if '__main__' == __name__:
         print "Ctrl-c pressed ..."
         sys.exit(1)
     except:
-        print '运行出错，请重试'
+        print '程序执行出错，请重试...'
         reload(sys)
         n = Main()
         n.cmdloop()
