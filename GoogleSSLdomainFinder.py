@@ -35,9 +35,9 @@ class Color:
 
 #查找域名
 class Domain:
-    def __init__(self,domain):
+    def __init__(self,domain,Token):
         self.domain = domain
-        self.Token = 'CAA='
+        self.Token = Token
         self.ds = []
         self.count = 0
         self.baseUrl = 'https://www.google.com/transparencyreport/jsonp/ct/search?incl_exp=true&incl_sub=true&c=jsonp'
@@ -48,26 +48,29 @@ class Domain:
         requests.packages.urllib3.disable_warnings()
 
     def get_domain(self):
-        while 1:
-            r = requests.get(self.baseUrl+'&domain='+self.domain+'&token='+self.Token, proxies=self.proxies,verify=False)
-            # print r.text
-            pattern = re.compile(r"jsonp\((.*)\)", re.I|re.X)
-            match = pattern.findall(r.text)
-            obj = json.loads(match[0])
-            self.ds.append(obj['results'])
+        r = requests.get(self.baseUrl+'&domain='+self.domain+'&token='+self.Token, proxies=self.proxies,verify=False)
+        # print r.text
+        pattern = re.compile(r"jsonp\((.*)\)", re.I|re.X)
+        match = pattern.findall(r.text)
+        obj = json.loads(match[0])
+        self.ds.append(obj['results'])
+        if self.count == 0:
             self.count = obj['numResults']
-            if hasattr(obj, 'nextPageToken'):
-                self.Token = obj['nextPageToken']
-            else:
-                break
+        if 'nextPageToken' in obj.keys():
+            self.Token = obj['nextPageToken']
+            self.get_domain()
+
 
     def run(self):
         try:
+            print '执行查询中，请稍候...'
             self.get_domain()
             print self.count
-            #print type(self.ds)
-            for x in self.ds[0]:
-                print x['subject']
+            x = 0
+            while (x<len(self.ds)):
+                for y in self.ds[x]:
+                    print y['subject']
+                x +=1
         except:
             print 'error'
 
@@ -97,7 +100,7 @@ class Main(cmd.Cmd):
 
     def do_find(self, line):
         domain = line
-        d = Domain(domain)
+        d = Domain(domain,'CAA=')
         d.run()
 
     def do_cls(self, line):
