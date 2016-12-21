@@ -149,7 +149,7 @@ class Main(cmd.Cmd):
  help - 打开本帮助
  find + domain - 列举子域名 example:find mi.com 域名可使用www.mi.com或者mi.com,无需添加http或者https
  cls - 清空屏幕
-
+ exit - 退出程序
         '''
     def __init__(self):
         cmd.Cmd.__init__(self)
