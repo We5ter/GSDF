@@ -77,7 +77,7 @@ class Domain:
     def run(self):
         try:
             c = Colored()
-            print c.green('执行查询中，请稍候...')
+            print c.green('\n执行查询中，请稍候...')
             self.get_domain()
             x = 0
             domains = []
@@ -94,11 +94,19 @@ class Domain:
             width = 20
             if len(domains)>3:
                 print '-'*(width*3+10)
-                while z <(len(domains)/3+1):
-                    print "{0} | {1} | {2}".format(c.fuchsia("{}"), c.cyan("{}"),
+                while z <(len(domains)):
+                    if (len(domains) - z) == 1:
+                        print "{} |".format(c.fuchsia("{}")).format(domains[z].ljust(width))
+                    elif (len(domains) - z) == 2:
+                        print "{} | {} |".format(c.fuchsia("{}"), c.cyan("{}")).format(domains[z].ljust(width),
+                                                                         domains[z + 1].ljust(width))
+                    else:
+                        print "{} | {} | {}".format(c.fuchsia("{}"), c.cyan("{}"),
                                                    c.yellow("{}")).format(domains[z].ljust(width),
                                                                          domains[z + 1].ljust(width),
                                                                          domains[z + 2].ljust(width))
+
+
                     print '-'*(width*3+10)
                     z +=3
             else:
@@ -110,7 +118,10 @@ class Domain:
             print '\n\n'
 
         except:
-            print c.red('程序部分执行出现异常')
+            if (self.domain ==''):
+                print c.red('请输入域名！')
+            else:
+                print c.red('域名不规范或者未查询到子域名记录，请稍后重试...')
 
 
 #命令行交互
@@ -156,7 +167,7 @@ if '__main__' == __name__:
         print "Ctrl-c pressed ..."
         sys.exit(1)
     except:
-        print '程序执行出错，请重试...'
+        print '程序执行出错，已重启程序，请重试...'
         reload(sys)
         n = Main()
         n.cmdloop()
