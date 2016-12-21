@@ -77,7 +77,7 @@ class Domain:
     def run(self):
         try:
             c = Colored()
-            print c.green('\n执行查询中，请稍候...')
+            print c.green('\n查询中，结果集可能较大，导致耗时较长，请耐心稍候...')
             self.get_domain()
             x = 0
             domains = []
@@ -88,11 +88,11 @@ class Domain:
             # 去重处理
             domains = list(set(domains))
 
-            print c.green('\n\n共有'+str(len(domains))+'条子域名记录:\n\n')
             # 按表格形式输出结果
             z = 0
             width = 20
-            if len(domains)>3:
+            if len(domains)>2:
+                print c.green('\n\n共有'+str(len(domains))+'条子域名记录:\n\n')
                 print '-'*(width*3+10)
                 while z <(len(domains)):
                     if (len(domains) - z) == 1:
@@ -110,28 +110,43 @@ class Domain:
                     print '-'*(width*3+10)
                     z +=3
             else:
-                while z <(len(domains)):
+                if not (len(domains) ==0):
+                    print c.green('\n\n共有'+str(len(domains))+'条子域名记录:\n\n')
                     print '-'*(width+5)
-                    print "{0}".format(c.fuchsia("{}")).format(domains[z].ljust(width))
-                    print '-'*(width+5)
-                    z +=1
+                    while z <(len(domains)):
+                        print "{0}".format(c.fuchsia("{}")).format(domains[z].ljust(width))
+                        print '-'*(width+5)
+                        z +=1
+                else:
+                    print c.red('未查询到子域名记录，请稍后重试...')
             print '\n\n'
 
+        except KeyboardInterrupt:
+            print "检测到Ctrl-c按键"
+            sys.exit(1)
         except:
-            if (self.domain ==''):
-                print c.red('请输入域名！')
-            else:
-                print c.red('域名不规范或者未查询到子域名记录，请稍后重试...')
-
+            print c.red('您所查询域名结果较多，耗时过长，可能已经断开连接')
 
 #命令行交互
 class Main(cmd.Cmd):
-    u'''
- GoogleSSLdomainFinder docs
+    u'''╭╮　　　　　　　╭╮　　
+　││　　　　　　　││　　
+╭┴┴———————┴┴╮
+│　　　　　　　　　　　│　　　
+│　　　　　　　　　　　│　　　
+│　●　　　　　　　●　│
+│○　　╰┬┬┬╯　　○│
+│　　　　╰—╯　　　　│　
+╰——┬Ｏ———Ｏ┬——╯
+　 　╭╮　　　　╭╮　　　　
+　 　╰┴————┴╯
+ GoogleSSLdomainFinder  帮助文档
 
- Site:https://lightrains.org
+ author:Wester
+ blog:https://lightrains.org
+
  help - 打开本帮助
- find + domain - 列举子域名
+ find + domain - 列举子域名 example:find mi.com 域名可使用www.mi.com或者mi.com,无需添加http或者https
  cls - 清空屏幕
 
         '''
@@ -149,12 +164,21 @@ class Main(cmd.Cmd):
         print self.__doc__
 
     def do_find(self, line):
+        co = Colored()
         domain = line
-        d = Domain(domain,'CAA=')
-        d.run()
+        if domain =='':
+            print co.red('请输入域名')
+        elif not re.search(r"^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$", domain):
+            print co.red('你输入的'+domain+'不符合规范')
+        else:
+            d = Domain(domain,'CAA=')
+            d.run()
 
     def do_cls(self, line):
         os.system("clear")
+        
+    def do_exit(self):
+        sys.exit(-1)
 
 
 
@@ -164,10 +188,10 @@ if '__main__' == __name__:
         m = Main()
         m.cmdloop()
     except KeyboardInterrupt:
-        print "Ctrl-c pressed ..."
+        print "检测到Ctrl-c按键"
         sys.exit(1)
     except:
-        print '程序执行出错，已重启程序，请重试...'
+        print '部分程序执行出错，已为您重启程序'
         reload(sys)
         n = Main()
         n.cmdloop()
