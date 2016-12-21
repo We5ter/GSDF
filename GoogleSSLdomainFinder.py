@@ -141,7 +141,7 @@ class Main(cmd.Cmd):
         reload(sys)
         sys.setdefaultencoding('utf-8')
         self.prompt = co.green("domainFinder[at]Wester =>")
-        self.intro = "\n\nWelcome to "+co.fuchsia("GoogleSSLdomainFinder")+" wrote by Wester("+co.yellow("blog:https://lightrains.org")+")!\n\nPlease print "+co.red('help')+" to start,Enjoy!\n\n"
+        self.intro = "\nWelcome to "+co.fuchsia("GoogleSSLdomainFinder")+" wrote by Wester("+co.yellow("blog:https://lightrains.org")+")!\n\nPlease print "+co.red('help')+" to start,Enjoy!\n\n"
     def do_EOF(self, line):
         return True
 
