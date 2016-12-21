@@ -14,8 +14,8 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 
 - 运行XX-Net,请保证xx-net运行在127.0.0.1:8087(默认),可访问127.0.0.1:8085查看
 - 下载[本脚本](https://github.com/We5ter/GoogleSSLdomainFinder/archive/master.zip)，解压并进入解压后的目录
-- 运行`python GoogleSSLdomainFinder.py`，运行中请保证xx-net持续运行
-
+- 运行`python GoogleSSLdomainFinder.py`，即可进入交互环境，运行中请保证xx-net持续运行
+- 输出结果以表格形式展示在终端，同时写入txt文件
 ####运行效果图
 
 - 初始状态
@@ -35,4 +35,6 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 ####维护信息
 - &copy;2016 Wester@CNSISMO
 - 作者blog:<a href="https://lightrains.org" target="_blank">https://lightrains.org</a>
-- 更新计划：持续更新中..
+
+####更迭记录
+- 2016.12.21 0.9.6版本，增加文件记录功能
