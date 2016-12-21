@@ -65,12 +65,18 @@ class Domain:
         try:
             print '执行查询中，请稍候...'
             self.get_domain()
-            print self.count
+            print '共有'+str(self.count)+'条子域名记录'
             x = 0
+            domains = []
             while (x<len(self.ds)):
                 for y in self.ds[x]:
-                    print y['subject']
+                    domains.append(y['subject'])
                 x +=1
+            # 去重处理
+            domains = list(set(domains))
+            for z in domains:
+                print z
+
         except:
             print 'error'
 
