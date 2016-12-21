@@ -54,6 +54,7 @@ class Domain:
     def __init__(self,domain,Token):
         self.domain = domain
         self.Token = Token
+        sys.setdefaultencoding('utf-8')
         self.ds = []
         self.baseUrl = 'https://www.google.com/transparencyreport/jsonp/ct/search?incl_exp=true&incl_sub=true&c=jsonp'
         self.proxies = {
@@ -121,6 +122,22 @@ class Domain:
                     print '\n\n'
                 else:
                     print c.red('未查询到子域名记录，请稍后重试...')
+
+            # 根据操作系统不同将查询记录写入文件
+            if os.path.exists('log') == False:
+                os.mkdir('log',0777)
+            if(os.name == 'posix'):
+                with open(os.getcwd()+"/log/"+self.domain+'.txt', 'wb') as f:
+                    for i in domains:
+                        f.write(i+'\r\n')
+                        f.flush()
+                f.close()
+            else:
+                with open(os.getcwd()+"\\log\\"+self.domain+'.txt', 'wb') as f:
+                    for i in domains:
+                        f.write(i+'\r\n')
+                        f.flush()
+                f.close()
 
         except KeyboardInterrupt:
             print "检测到Ctrl-c按键，正在退出"
