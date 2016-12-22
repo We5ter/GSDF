@@ -125,7 +125,7 @@ class Domain:
 
             # 根据操作系统不同将查询记录写入文件
             if os.path.exists('log') == False:
-                os.mkdir('log',0777)
+                os.mkdir('log')
             if(os.name == 'posix'):
                 with open(os.getcwd()+"/log/"+self.domain+'.txt', 'wb') as f:
                     for i in domains:
