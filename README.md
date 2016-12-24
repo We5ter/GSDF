@@ -2,7 +2,7 @@
 
 
 ####简要介绍
-GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transparencyreport/" target="_blank">谷歌透明证书查询</a>的python脚本，而使用谷歌透明证书查询子域名准确率较高，但是也存在部分子域名漏查的不足，此外，此项目也是 @CNSISMO 开发中的某项目模块。
+GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transparencyreport/" target="_blank">谷歌透明证书查询</a>的python脚本(基于XX-Net访问Google)，而使用谷歌透明证书查询子域名准确率较高，但是也存在部分子域名被漏掉的不足，可在一定程度上协助渗透测试，此外，此项目也是 @CNSISMO 开发中的某项目模块。
 
 <hr>
 
