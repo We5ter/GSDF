@@ -1,0 +1,2 @@
+*.jdpay.com
+*.jd.com

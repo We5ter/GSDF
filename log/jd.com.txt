@@ -1,0 +1,9 @@
+*.jr.jd.com
+car.jd.com
+*.jd.com
+*.m.jd.com
+*.shop.jd.com
+s11.wac.edgecastcdn.net
+yq.jd.com
+*.smart.jd.com
+m.car.jd.com
