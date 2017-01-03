@@ -24,7 +24,7 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 
 - 下载[本脚本](https://github.com/We5ter/GoogleSSLdomainFinder/archive/master.zip)，解压并进入解压后的目录
 
-- 运行`python GoogleSSLdomainFinder.py`，即可进入交互环境，运行中请保证xx-net持续运行；也可使用其他文件`from googlessldomainfinder_api import GoogleSSLdomainFinder`
+- 运行`python GoogleSSLdomainFinder.py`，即可进入交互环境，运行中请保证xx-net持续运行；也可使用其他文件`from GoogleSSLdomainFinder_Api import GoogleSSLdomainFinder`
 
 - 输出结果以表格形式展示在终端，同时写入txt文件
 
