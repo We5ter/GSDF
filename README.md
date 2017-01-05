@@ -14,6 +14,8 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
   <pre><code>from GSDFA import GoogleSSLdomainFinder
   do = GoogleSSLdomainFinder('mi.com')
   do.list()  #输出为列表
+  </code></pre>
+  
 <hr>
 
 ####使用方法
