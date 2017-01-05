@@ -7,6 +7,7 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 <hr>
 
 ####更迭记录
+
 - 2016.12.21 增加文件记录功能
 - 2016.12.22 增加api库
 <hr>
@@ -32,15 +33,15 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 
 - 初始状态
 
-![1](https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex1.png)
+<img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex1.png" width="500px">
 
 - help文档
 
-![3](https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex3.png)
+<img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex3.png" width="500px">
 
 - 查询示例
+<img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex2.png" width="500px">
 
-![2](https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex2.png)
 
 <hr>
 
