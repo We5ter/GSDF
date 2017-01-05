@@ -25,7 +25,7 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 
 - 下载[本脚本](https://github.com/We5ter/GoogleSSLdomainFinder/archive/master.zip)，解压并进入解压后的目录
 
-- 运行`python GoogleSSLdomainFinder.py`，即可进入交互环境，运行中请保证xx-net持续运行；也可使用其他文件`from GoogleSSLdomainFinder_Api import GoogleSSLdomainFinder`
+- 运行`python GoogleSSLdomainFinder.py`，即可进入交互环境，运行中请保证xx-net持续运行；
 
 - 输出结果以表格形式展示在终端，同时写入txt文件
 
@@ -40,6 +40,7 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 <img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex3.png" width="500px">
 
 - 查询示例
+
 <img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex2.png" width="500px">
 
 
