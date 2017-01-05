@@ -10,6 +10,10 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 
 - 2016.12.21 增加文件记录功能
 - 2016.12.22 增加api库
+- 2017.01.05 完成api库，使用方法：
+  <pre><code>from GSDFA import GoogleSSLdomainFinder
+  do = GoogleSSLdomainFinder('mi.com')
+  do.list()  #输出为列表
 <hr>
 
 ####使用方法
