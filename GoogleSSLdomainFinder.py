@@ -55,7 +55,6 @@ class Domain:
     def __init__(self,domain,Token):
         self.domain = domain
         self.Token = Token
-        sys.setdefaultencoding('utf-8')
         self.ds = []
         self.baseUrl = 'https://www.google.com/transparencyreport/jsonp/ct/search?incl_exp=true&incl_sub=true&c=jsonp'
         self.proxies = {
