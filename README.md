@@ -1,8 +1,8 @@
-## GoogleSSLdomainFinder 使用指引
+## GoogleSSLdomainFinder(GSDF) 使用指引
 
 
 ####简要介绍
-GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transparencyreport/" target="_blank">谷歌透明证书查询</a>的python脚本(基于XX-Net访问Google)，而使用谷歌透明证书查询子域名准确率较高，但是也存在部分子域名被漏掉的不足，可在一定程度上协助渗透测试，此外，此项目也是 @CNSISMO 开发中的某项目模块。
+GoogleSSLdomainFinder(GSDF)是为方便使用<a href="https://www.google.com/transparencyreport/" target="_blank">谷歌透明证书查询</a>的python脚本(基于XX-Net访问Google)，而使用谷歌透明证书查询子域名准确率较高，但是也存在部分子域名被漏掉的不足，可在一定程度上协助渗透测试，此外，此项目也是 @CNSISMO 开发中的某项目模块。
 
 <hr>
 
@@ -31,11 +31,11 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 
 - 下载[本脚本](https://github.com/We5ter/GoogleSSLdomainFinder/archive/master.zip)，解压并进入解压后的目录
 
-- 运行`python GoogleSSLdomainFinder.py`，即可进入交互环境，运行中请保证xx-net持续运行；
+- 运行`python GSDFT.py`，即Terminal version，运行中请保证xx-net持续运行；
 
 - 输出结果以表格形式展示在终端，同时写入txt文件
 
-####运行效果图
+####Terminal version运行效果图
 
 - 初始状态
 
