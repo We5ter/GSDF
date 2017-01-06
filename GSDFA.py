@@ -31,7 +31,6 @@ class GoogleSSLdomainFinder:
             self.Token = obj['nextPageToken']
             self.get_domain()
 
-
     def list(self):
         try:
             self.get_domain()
