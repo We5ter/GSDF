@@ -44,11 +44,11 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 
 - help文档
 
-<img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex3.png" width="500px">
+<img src="https://github.com/We5ter/GSDF/blob/master/example/Screen%20Shot%202017-01-09%20at%207.13.57%20PM.png" width="500px">
 
 - 查询示例
 
-<img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex2.png" width="500px">
+<img src="https://github.com/We5ter/GSDF/blob/master/example/Screen%20Shot%202017-01-09%20at%207.14.27%20PM.png" width="500px">
 
 
 <hr>
