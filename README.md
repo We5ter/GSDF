@@ -47,11 +47,11 @@ Download https://codeload.github.com/XX-net/XX-Net/zip/3.2.7=> Unzip => Run star
 
 - help docs
 
-<img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex3.png" width="500px">
+<img src="https://github.com/We5ter/GSDF/blob/master/example/Screen%20Shot%202017-01-09%20at%207.13.57%20PM.png" width="500px">
 
 - query example
 
-<img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex2.png" width="500px">
+<img src="https://github.com/We5ter/GSDF/blob/master/example/Screen%20Shot%202017-01-09%20at%207.14.27%20PM.png" width="500px">
 
 
 <hr>
