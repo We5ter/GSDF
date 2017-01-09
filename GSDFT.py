@@ -7,20 +7,18 @@ import re
 import json
 import os,cmd,sys
 
-#文本高亮
+#text highlight
 class Colored(object):
-    # 显示格式: \033[显示方式;前景色;背景色m
-    # 只写一个字段表示前景色,背景色默认
-    RED = '\033[31m'       # 红色
-    GREEN = '\033[32m'     # 绿色
-    YELLOW = '\033[33m'    # 黄色
-    BLUE = '\033[34m'      # 蓝色
-    FUCHSIA = '\033[35m'   # 紫红色
-    CYAN = '\033[36m'      # 青蓝色
-    WHITE = '\033[37m'     # 白色
+    RED = '\033[31m'       
+    GREEN = '\033[32m'     
+    YELLOW = '\033[33m'    
+    BLUE = '\033[34m'      
+    FUCHSIA = '\033[35m'   
+    CYAN = '\033[36m'      
+    WHITE = '\033[37m'     
 
     #: no color
-    RESET = '\033[0m'      # 终端默认颜色
+    RESET = '\033[0m'      
 
     def color_str(self, color, s):
         return '{}{}{}'.format(
@@ -50,7 +48,7 @@ class Colored(object):
     def white(self, s):
         return self.color_str('WHITE', s)
 
-#查找域名
+#domainfinde function
 class Domain:
     def __init__(self,domain,Token):
         self.domain = domain
@@ -78,7 +76,7 @@ class Domain:
     def run(self):
         try:
             c = Colored()
-            print c.green('\n查询中，结果集可能较大，导致耗时较长，请耐心等待...')
+            print c.green('\nProcessing...,The result may be numerous.so please wait for a while.')
             self.get_domain()
             x = 0
             domains = []
@@ -86,14 +84,14 @@ class Domain:
                 for y in self.ds[x]:
                     domains.append(y['subject'])
                 x +=1
-            # 去重处理
+            # Remove duplicates
             domains = list(set(domains))
 
-            # 按表格形式输出结果
+            # Output the results in a table
             z = 0
             width = 20
             if len(domains)>2:
-                print c.green('\n\n共有'+str(len(domains))+'条子域名记录:\n\n')
+                print c.green('\n\nAha,I have found '+str(len(domains))+' subdomains:\n\n')
                 print '-'*(width*3+10)
                 while z <(len(domains)):
                     if (len(domains) - z) == 1:
@@ -113,7 +111,7 @@ class Domain:
                 print '\n\n'
             else:
                 if not (len(domains) ==0):
-                    print c.green('\n\n共有'+str(len(domains))+'条子域名记录:\n\n')
+                    print c.green('\n\nAha,I have found '+str(len(domains))+' subdomains:\n\n')
                     print '-'*(width+5)
                     while z <(len(domains)):
                         print "{0}".format(c.fuchsia("{}")).format(domains[z].ljust(width))
@@ -121,9 +119,9 @@ class Domain:
                         z +=1
                     print '\n\n'
                 else:
-                    print c.red('未查询到子域名记录，请稍后重试...')
+                    print c.red('unfortunately,I can not find subdomains for your conditions...')
 
-            # 根据操作系统不同将查询记录写入文件
+            # write into txt file
             if os.path.exists('log') == False:
                 os.mkdir('log')
             if(os.name == 'posix'):
@@ -140,34 +138,28 @@ class Domain:
                 f.close()
 
         except KeyboardInterrupt:
-            print "检测到Ctrl-c按键，正在退出"
+            print "Ctrl-c Pressed，exit..."
             sys.exit(1)
         except:
-            print c.red('您所查询域名结果较多，耗时过长，可能已经断开连接')
+            print c.red('Sorry,timeout or network is not smooth')
 
-#命令行交互
+#terminal
 class Main(cmd.Cmd):
-    u'''╭╮　　　　　　　╭╮　　
-　││　　　　　　　││　　
-╭┴┴———————┴┴╮
-│　　　　　　　　　　　│　　　
-│　　　　　　　　　　　│　　　
-│　●　　　　　　　●　│
-│○　　╰┬┬┬╯　　○│
-│　　　　╰—╯　　　　│　
-╰——┬Ｏ———Ｏ┬——╯
-　 　╭╮　　　　╭╮　　　　
-　 　╰┴————┴╯
- GoogleSSLdomainFinder  帮助文档
+    '''
+ GoogleSSLdomainFinder  docs
 
  author:Wester
  blog:https://lightrains.org
 
- help - 打开本帮助
- find + domain - 列举子域名 example:find mi.com 域名可使用www.mi.com或者mi.com,无需添加http或者https
- cls - 清空屏幕
- exit - 退出程序
-        '''
+ help - open this help
+
+ find + domain - list subdomains,example command:find mi.com;domain format:www.mi.com or mi.com;don't need to add http/https
+ 
+ cls - clear screen
+
+ exit - exit program
+
+    '''
     def __init__(self):
         cmd.Cmd.__init__(self)
         co = Colored()
@@ -185,9 +177,9 @@ class Main(cmd.Cmd):
         co = Colored()
         domain = line
         if domain =='':
-            print co.red('请输入域名')
+            print co.red('please input domain')
         elif not re.search(r"^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$", domain):
-            print co.red('你输入的'+domain+'不符合规范')
+            print co.red(''+domain+'is illegal')
         else:
             d = Domain(domain,'CAA=')
             d.run()
@@ -206,7 +198,7 @@ if '__main__' == __name__:
         m = Main()
         m.cmdloop()
     except KeyboardInterrupt:
-        print "检测到Ctrl-c按键,正在退出"
+        print "Ctrl-c pressed,exit..."
         sys.exit(1)
     except:
         exit()
