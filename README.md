@@ -1,6 +1,6 @@
 # GoogleSSLdomainFinder Guidelines
 
-**README.md in [Chinese 中文](https://github.com/We5ter/0day.today/blob/master/README_CN.md)**
+**README.md in [Chinese 中文](https://github.com/We5ter/GSDF/blob/master/README_CN.md)**
 
 ***
 
