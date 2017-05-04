@@ -4,11 +4,11 @@
 
 ***
 
-###Project Description
+### Project Description
 
 GoogleSSLdomainFinder is a domain scanner based on https://www.google.com/transparencyreport/ (use XX-Net to access Google).
 
-###Change records
+### Change records
 
 - 2016.12.21 Increase the file record function
 - 2016.12.22 Add the api library
@@ -18,7 +18,7 @@ from GSDFA import GoogleSSLdomainFinder
 do = GoogleSSLdomainFinder ('mi.com')
 do.list () # output as a list
 ```
-###Using Instructions
+### Using Instructions
 
 - First make sure the computer is already installed on python 2.7 or later;
 
@@ -28,7 +28,7 @@ do.list () # output as a list
 Download https://codeload.github.com/XX-net/XX-Net/zip/3.2.7=> Unzip => Run start.vbs (windows) / start (unix / linux) => Import the browser plug-in and Certificate => Waiting for xx-net scan IP to complete, about 30 minutes
 ```
 
-**Note: If you use the Shadowsocks, etc. to access Google, temporarily remove the script line of proxies = proxies.**
+** Note: If you use the Shadowsocks, etc. to access Google, temporarily remove the script line of proxies = proxies.**
 
 
 - Run XX-Net, please ensure that xx-net running in 127.0.0.1:8087 (default), you can access 127.0.0.1:8085 view it;
@@ -39,7 +39,7 @@ Download https://codeload.github.com/XX-net/XX-Net/zip/3.2.7=> Unzip => Run star
 
 - The output is displayed in tabular form on the terminal, the results is also written in txt file.
 
-###Terminal version demo
+### Terminal version demo
 
 - script start status
 
@@ -56,7 +56,7 @@ Download https://codeload.github.com/XX-net/XX-Net/zip/3.2.7=> Unzip => Run star
 
 <hr>
 
-####Project Mainentence
+### Project Mainentence
 
 - &copy;2016 Wester@CNSISMO
 - blog:<a href="https://lightrains.org" target="_blank">https://lightrains.org</a>
