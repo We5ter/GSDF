@@ -44,7 +44,7 @@ class GoogleSSLdomainFinder:
             domains = list(set(domains))
         except:
             domains = []
-        print domains
+        return domains
 
-g = GoogleSSLdomainFinder('mi.com')
-g.list()
+
+

@@ -3,9 +3,11 @@ webpac.uestc.edu.cn
 ioatest.uestc.edu.cn
 mail.uestc.edu.cn
 idas.uestc.edu.cn
+bbs.uestc.edu.cn
 ostec.uestc.edu.cn
 www.uestc.edu.cn
 epay.uestc.edu.cn
+masterblog.uestc.edu.cn
 yst.uestc.edu.cn
 smilelab.uestc.edu.cn
 *.uestc.edu.cn
