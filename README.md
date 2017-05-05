@@ -28,7 +28,15 @@ do.list () # output as a list
 Download https://codeload.github.com/XX-net/XX-Net/zip/3.2.7=> Unzip => Run start.vbs (windows) / start (unix / linux) => Import the browser plug-in and Certificate => Waiting for xx-net scan IP to complete, about 30 minutes
 ```
 
-** Note: If you use the Shadowsocks, etc. to access Google, temporarily remove the script line of proxies = proxies.**
+** Note:**
+
+If you use the Shadowsocks, etc. to access Google, please replace proxies port to
+```
+self.proxies = {
+            'http': 'http://127.0.0.1:1087',
+            'https': 'http://127.0.0.1:1087',
+            }
+```
 
 
 - Run XX-Net, please ensure that xx-net running in 127.0.0.1:8087 (default), you can access 127.0.0.1:8085 view it;
