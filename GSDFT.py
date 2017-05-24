@@ -146,25 +146,27 @@ class Domain:
 #terminal
 class Main(cmd.Cmd):
     '''
-    <nobr>   ____                   _      ____ ____  _        _                       _       _____ _           _           <br />
-  / ___| ___   ___   __ _| | ___/ ___/ ___|| |    __| | ___  _ __ ___   __ _(_)_ __ |  ___(_)_ __   __| | ___ _ __ <br />
- | |  _ / _ \ / _ \ / _` | |/ _ \___ \___ \| |   / _` |/ _ \| '_ ` _ \ / _` | | '_ \| |_  | | '_ \ / _` |/ _ \ '__|<br />
- | |_| | (_) | (_) | (_| | |  __/___) |__) | |___ (_| | (_) | | | | | | (_| | | | | |  _| | | | | | (_| |  __/ |   <br />
-  \____|\___/ \___/ \__, |_|\___|____/____/|_____\__,_|\___/|_| |_| |_|\__,_|_|_| |_|_|   |_|_| |_|\__,_|\___|_|   <br />
-                    |___/                                                                                          </nobr>
-                    
+       ____                   _      ____ ____  _        _                       _       _____ _           _           
+  / ___| ___   ___   __ _| | ___/ ___/ ___|| |    __| | ___  _ __ ___   __ _(_)_ __ |  ___(_)_ __   __| | ___ _ __ 
+ | |  _ / _ \ / _ \ / _` | |/ _ \___ \___ \| |   / _` |/ _ \| '_ ` _ \ / _` | | '_ \| |_  | | '_ \ / _` |/ _ \ '__|
+ | |_| | (_) | (_) | (_| | |  __/___) |__) | |___ (_| | (_) | | | | | | (_| | | | | |  _| | | | | | (_| |  __/ |   
+  \____|\___/ \___/ \__, |_|\___|____/____/|_____\__,_|\___/|_| |_| |_|\__,_|_|_| |_|_|   |_|_| |_|\__,_|\___|_|   
+                    |___/                                                                                          
+ 
+ Author:Wester@TSRC
 
- Author:Wester
-
- Help - open this help
 
  How to use:
  
- find + domain - list subdomains,example command:find mi.com;domain format:www.mi.com or mi.com;you don't need to add http/https
+ [find + domain] - list subdomains
  
- cls - clear screen
+ (example command:find mi.com and you don't need to add http/https)
+ 
+ [cls] - clear screen
+ 
+ [help] - open this help
 
- exit - exit program
+ [exit] - exit program
 
     '''
     def __init__(self):
