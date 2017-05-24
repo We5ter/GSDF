@@ -146,14 +146,21 @@ class Domain:
 #terminal
 class Main(cmd.Cmd):
     '''
- GoogleSSLdomainFinder  docs
+    <nobr>   ____                   _      ____ ____  _        _                       _       _____ _           _           <br />
+  / ___| ___   ___   __ _| | ___/ ___/ ___|| |    __| | ___  _ __ ___   __ _(_)_ __ |  ___(_)_ __   __| | ___ _ __ <br />
+ | |  _ / _ \ / _ \ / _` | |/ _ \___ \___ \| |   / _` |/ _ \| '_ ` _ \ / _` | | '_ \| |_  | | '_ \ / _` |/ _ \ '__|<br />
+ | |_| | (_) | (_) | (_| | |  __/___) |__) | |___ (_| | (_) | | | | | | (_| | | | | |  _| | | | | | (_| |  __/ |   <br />
+  \____|\___/ \___/ \__, |_|\___|____/____/|_____\__,_|\___/|_| |_| |_|\__,_|_|_| |_|_|   |_|_| |_|\__,_|\___|_|   <br />
+                    |___/                                                                                          </nobr>
+                    
 
- author:Wester
- blog:https://lightrains.org
+ Author:Wester
 
- help - open this help
+ Help - open this help
 
- find + domain - list subdomains,example command:find mi.com;domain format:www.mi.com or mi.com;don't need to add http/https
+ How to use:
+ 
+ find + domain - list subdomains,example command:find mi.com;domain format:www.mi.com or mi.com;you don't need to add http/https
  
  cls - clear screen
 
