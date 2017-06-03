@@ -64,7 +64,4 @@ self.proxies = {
 
 <hr>
 
-### Project Mainentence
-
-- &copy;2016 Wester@CNSISMO
-- blog:<a href="https://lightrains.org" target="_blank">https://lightrains.org</a>
+&copy;2016 Wester@Sixtant Lab
