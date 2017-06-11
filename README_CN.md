@@ -62,4 +62,4 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
 
 <hr>
 
-&copy;2016 Wester@Sixtant Lab
+&copy;Sixtant Security Lab 2016-2017
