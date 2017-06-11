@@ -64,4 +64,4 @@ self.proxies = {
 
 <hr>
 
-&copy;2016 Wester@Sixtant Lab
+&copy;Sixtant Security Lab 2016-2017
