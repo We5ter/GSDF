@@ -1,4 +1,4 @@
-## GoogleSSLdomainFinder 使用指引
+## GoogleSSLdomainFinder
 
 **仓库名已缩短为GSDF,原链接https://github.com/We5ter/GoogleSSLdomainFinder 会自动重定向到现在的链接**
 
