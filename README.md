@@ -1,4 +1,4 @@
-# GoogleSSLdomainFinder Guidelines
+# GoogleSSLdomainFinder
 
 **README.md in [Chinese 中文](https://github.com/We5ter/GSDF/blob/master/README_CN.md)**
 
