@@ -1,5 +1,9 @@
 # GoogleSSLdomainFinder
 
+![GitHub issues](https://img.shields.io/github/issues/We5ter/GSDF.svg)
+![GitHub forks](https://img.shields.io/github/forks/We5ter/GSDF.svg)
+![GitHub stars](https://img.shields.io/github/stars/We5ter/GSDF.svg)
+
 **README.md in [Chinese 中文](https://github.com/We5ter/GSDF/blob/master/README_CN.md)**
 
 ***
