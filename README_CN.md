@@ -1,5 +1,9 @@
 ## GoogleSSLdomainFinder
 
+![GitHub issues](https://img.shields.io/github/issues/We5ter/GSDF.svg)
+![GitHub forks](https://img.shields.io/github/forks/We5ter/GSDF.svg)
+![GitHub stars](https://img.shields.io/github/stars/We5ter/GSDF.svg)
+
 **仓库名已缩短为GSDF,原链接https://github.com/We5ter/GoogleSSLdomainFinder 会自动重定向到现在的链接**
 
 #### 简要介绍
