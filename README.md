@@ -22,6 +22,9 @@ from GSDFA import GoogleSSLdomainFinder
 do = GoogleSSLdomainFinder ('mi.com')
 do.list () # output as a list
 ```
+
+- 2017.09.13 waiting for updating to multiple threads,to increase speed
+
 ### Using Instructions
 
 - First make sure the computer is already installed on python 2.7 or later;
