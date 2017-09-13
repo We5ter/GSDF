@@ -22,6 +22,8 @@ GoogleSSLdomainFinder是为方便使用<a href="https://www.google.com/transpare
   do.list()  #输出为列表
   </code></pre>
   
+- 2017.09.13 准备更改抓取模式，以加快输出速度
+
 <hr>
 
 #### 使用方法
