@@ -23,7 +23,7 @@ do = GoogleSSLdomainFinder ('mi.com')
 do.list () # output as a list
 ```
 
-- 2017.09.13 waiting for updating to multiple threads,to increase speed
+- 2017.09.13 waiting for updating,to increase speed
 
 ### Using Instructions
 
