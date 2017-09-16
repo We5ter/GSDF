@@ -55,6 +55,9 @@ self.proxies = {
 
 - The output is displayed in tabular form on the terminal, the results is also written in txt file.
 
+### Demo video
+
+![demo](https://github.com/We5ter/GSDF/blob/master/demo.gif)
 
 <hr>
 
