@@ -1,4 +1,4 @@
-# GoogleSSLdomainFinder
+# GSDF
 
 ![GitHub issues](https://img.shields.io/github/issues/We5ter/GSDF.svg)
 ![GitHub forks](https://img.shields.io/github/forks/We5ter/GSDF.svg)
@@ -10,7 +10,7 @@
 
 ### Project Description
 
-GoogleSSLdomainFinder is a domain scanner based on https://www.google.com/transparencyreport/ (use XX-Net to access Google).
+**GoogleSSLdomainFinder** is a domain scanner based on https://transparencyreport.google.com/https/certificates (use XX-Net to access Google).
 
 ### Change records
 
@@ -53,20 +53,6 @@ self.proxies = {
 - Run  `python GSDFT.py`, this is Terminal version, please ensure that running xx-net continuous operation;
 
 - The output is displayed in tabular form on the terminal, the results is also written in txt file.
-
-### Terminal version demo
-
-- script start status
-
-<img src="https://github.com/We5ter/GoogleSSLdomainFinder/blob/master/example/ex1.png" width="500px">
-
-- help docs
-
-<img src="https://github.com/We5ter/GSDF/blob/master/example/Screen%20Shot%202017-01-09%20at%207.13.57%20PM.png" width="500px">
-
-- query example
-
-<img src="https://github.com/We5ter/GSDF/blob/master/example/Screen%20Shot%202017-01-09%20at%207.14.27%20PM.png" width="500px">
 
 
 <hr>
