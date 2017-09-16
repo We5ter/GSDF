@@ -20,7 +20,7 @@
   do.list()  #输出为列表
   </code></pre>
   
-- 2017.09.13 准备更改抓取模式，以加快输出速度
+- 2017.09.16 更新至v1.1版本
 
 <hr>
 
@@ -48,6 +48,11 @@
 - 运行`python GSDFT.py`，即Terminal version，运行中请保证xx-net持续运行；
 
 - 输出结果以表格形式展示在终端，同时写入txt文件
+
+### 演示视频
+
+![demo](https://github.com/We5ter/GSDF/blob/master/demo.gif)
+
 
 <hr>
 
