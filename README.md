@@ -1,4 +1,4 @@
-# GSDF
+# GoogleSSLdomainFinder
 
 ![GitHub issues](https://img.shields.io/github/issues/We5ter/GSDF.svg)
 ![GitHub forks](https://img.shields.io/github/forks/We5ter/GSDF.svg)
