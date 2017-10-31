@@ -7,7 +7,6 @@ import re
 import json
 import sys
 
-#查找域名
 class GoogleSSLdomainFinder:
     def __init__(self,domain):
         self.domain = domain
@@ -40,7 +39,7 @@ class GoogleSSLdomainFinder:
                 for y in self.ds[x]:
                     domains.append(y['subject'])
                 x +=1
-            # 去重处理
+            # remove duplicate
             domains = list(set(domains))
         except:
             domains = []
