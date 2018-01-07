@@ -25,7 +25,7 @@ domain.list () # output as a dict
 ```
 
 - 2017.09.16 update to v1.1
-- 2018.1.7 update to v2.0(The original api was closed,so I rewrite this script again)
+- 2018.1.7 update to v2.0 (The original api was closed,so I rewrite this script again)
 
 ### Using Instructions
 
@@ -37,6 +37,7 @@ self.proxies = {
             'https': 'http://127.0.0.1:1087',
             }
 ```
+- Download this script, extract and enter the extracted directory;
 
 - Run  `python GSDFT.py -h`, this is Terminal version;
 
