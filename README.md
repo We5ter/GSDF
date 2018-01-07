@@ -12,8 +12,7 @@
 
 ### Project Description
 
-**GoogleSSLdomainFinder** is a domain scanner based on https://transparencyreport.google.com/https/certificates (use XX-Net to access Google).
-
+**GoogleSSLdomainFinder** is a domain scanner based on https://transparencyreport.google.com/https/certificates.
 ### Change records
 
 - 2016.12.21 Increase the file record function
@@ -21,25 +20,17 @@
 - 2017.01.05 complete api library, usage:
 ```
 from GSDFA import GoogleSSLdomainFinder
-do = GoogleSSLdomainFinder ('mi.com')
-do.list () # output as a list
+domain = GoogleSSLdomainFinder ('chaitin.cn')
+domain.list () # output as a dict
 ```
 
 - 2017.09.16 update to v1.1
+- 2018.1.7 update to v2.0(The original api was closed,so I rewrite this script again)
 
 ### Using Instructions
 
 - First make sure the computer is already installed on python 2.7 or later;
-
-- Make sure that you can visit google, install XX-Net (if installed, you can ignore this step, a brief installation process is as follows)
-
-```
-Download https://codeload.github.com/XX-net/XX-Net/zip/3.2.7=> Unzip => Run start.vbs (windows) / start (unix / linux) => Import the browser plug-in and Certificate => Waiting for xx-net scan IP to complete, about 30 minutes
-```
-
-**Note**
-
-If you use the Shadowsocks to access Google, please replace proxies port to
+- If you use the Shadowsocks to access Google, please cancel the following lines comments and add `proxies=self.proxies` to requests
 ```
 self.proxies = {
             'http': 'http://127.0.0.1:1087',
@@ -47,12 +38,7 @@ self.proxies = {
             }
 ```
 
-
-- Run XX-Net, please ensure that xx-net running in 127.0.0.1:8087 (default), you can access 127.0.0.1:8085 view it;
-
-- Download this script, unzip it and go to the unpacked directory;
-
-- Run  `python GSDFT.py`, this is Terminal version, please ensure that running xx-net continuous operation;
+- Run  `python GSDFT.py -h`, this is Terminal version;
 
 - The output is displayed in tabular form on the terminal, the results is also written in txt file.
 
