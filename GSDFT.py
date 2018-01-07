@@ -8,20 +8,20 @@ import json
 import os,cmd,sys
 import argparse
 import time,datetime
-from tqdm import tqdm  
+from tqdm import tqdm
 
 #text highlight
 class Colored(object):
-    RED = '\033[31m'       
-    GREEN = '\033[32m'     
-    YELLOW = '\033[33m'    
-    BLUE = '\033[34m'      
-    FUCHSIA = '\033[35m'   
-    CYAN = '\033[36m'      
-    WHITE = '\033[37m'     
+    RED = '\033[31m'
+    GREEN = '\033[32m'
+    YELLOW = '\033[33m'
+    BLUE = '\033[34m'
+    FUCHSIA = '\033[35m'
+    CYAN = '\033[36m'
+    WHITE = '\033[37m'
 
     #: no color
-    RESET = '\033[0m'      
+    RESET = '\033[0m'
 
     def color_str(self, color, s):
         return '{}{}{}'.format(
@@ -87,7 +87,12 @@ class Domain:
         if self.total_num == 0:
            for x in rep[1]:
                self.total_num += x[3]
-           print(c.green("   Found ")+c.red(str(self.total_num))+c.green(" subdomain certificate logs"))
+           if self.total_num != 0:
+               print("  "+c.red(str(self.total_num))+c.green(" subdomain certificate logs found"))
+           else:
+               print("  "+c.red(str(self.total_num))+c.green(" subdomain certificate logs found"))
+               print(c.red("[+]No subdomain certificate log found"))
+               exit()
         for y in rep[0]:
             if not self.domains.has_key(y[1]):
                 self.domains[y[1]] = {}
@@ -103,12 +108,12 @@ class Domain:
                         self.domains[y[1]]['is_expired'] = 0
                 else:
                     continue
-        
+
         pageNum = (self.total_num/10) + 1
-        with tqdm(total=self.total_num,ncols=80) as pbar:  
+        with tqdm(total=self.total_num,ncols=80) as pbar:
             if self.flag < pageNum:
-               if self.total_num - (self.flag)*10 <10:  
-               	   pbar.update(self.total_num) 
+               if self.total_num - (self.flag)*10 <10:
+               	   pbar.update(self.total_num)
                else:
                    pbar.update((self.flag+1)*10)
                    self.flag = self.flag+1
@@ -119,15 +124,15 @@ class Domain:
     def run(self):
         c = Colored()
         print("[+]Searching subdomains for "+c.cyan(self.search_domain))
-        self.get_domain()  
-        print (c.fuchsia("[+]Printing subdomains for ")+c.cyan(self.search_domain)) 
+        self.get_domain()
+        print (c.fuchsia("[+]Printing subdomains for ")+c.cyan(self.search_domain))
         for key,value in self.domains.items():
             if value['is_expired'] == 1 and self.show_expired == 'show':
                 print(key+"   "+c.red("[Expired on "+datetime.datetime.fromtimestamp(value['expired_time']).strftime('%Y-%m-%d')+"]"))
             else:
                 print(key)
         self.write_log()
-    
+
     def write_log(self):
         c = Colored()
         if(os.name == 'posix'):
@@ -157,10 +162,25 @@ if '__main__' == __name__:
     `````````````````````````````````````````
        Author:Wester@Sixtant Security Lab
     ''')
+    c = Colored()
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--domain', dest='search_domain', action='store',required=True,help='The domain you want to search(input example: google.com/twitter.com),no need to add http/https')
     parser.add_argument('-s', '--save', dest='save_path', action='store', default='log',required=False,help='The folder that subdomains will be saved under current path,(default:log),no need to /')
     parser.add_argument('-e', '--expired', dest='show_expired', action='store', required=True,help='show the subdomains which have an expired Security certificate(input choices:show/hide)')
     args = parser.parse_args()
-    d = Domain(args.search_domain, args.save_path,args.show_expired)
-    d.run()
+    if re.match(r"^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$",args.search_domain):
+        try:
+            if args.show_expired == 'show' or args.show_expired == 'hide':
+                d = Domain(args.search_domain, args.save_path,args.show_expired)
+                d.run()
+            else:
+                print(c.red("[+]argument --expired/-e is illegal!"))
+                exit()
+        except KeyboardInterrupt:
+            print(c.red("[+]Ctrl+c exit..."))
+            exit()
+        except:
+            print(c.red("[+]Error exit..."))
+    else:
+        print(c.red("[+]argument --domain/-d is illegal!"))
+        exit()
