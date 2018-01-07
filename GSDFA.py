@@ -11,7 +11,7 @@ import time,datetime
 from tqdm import tqdm
 
 #domainfinde function
-class Domain:
+class GoogleSSLdomainFinder:
     def __init__(self,search_domain,save_path,show_expired):
         self.search_domain = search_domain
         self.save_path = save_path
