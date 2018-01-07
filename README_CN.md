@@ -19,8 +19,8 @@
 - 2017.01.05 完成api库，使用方法：
   <pre><code>from GSDFA import GoogleSSLdomainFinder
   do = GoogleSSLdomainFinder('mi.com')
-  do.list()  #输出为列表
-  </code></pre>
+  do.list()  #输出为字典
+  </code></pre>
   
 - 2017.09.16 更新至v1.1版本
 - 2018.1.7 更新至v2.0版本 （原接口失效，重写）
