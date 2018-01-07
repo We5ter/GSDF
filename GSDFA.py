@@ -5,45 +5,64 @@ __author__ = 'Wester'
 import requests
 import re
 import json
-import sys
+import os,cmd,sys
+import argparse
+import time,datetime
+from tqdm import tqdm
 
-class GoogleSSLdomainFinder:
-    def __init__(self,domain):
-        self.domain = domain
-        self.Token ='CAA='
-        self.ds = []
-        self.baseUrl = 'https://www.google.com/transparencyreport/jsonp/ct/search?incl_exp=true&incl_sub=true&c=jsonp'
-        self.proxies = {
-            'http': 'http://127.0.0.1:8087',
-            'https': 'http://127.0.0.1:8087',
-        }
+#domainfinde function
+class Domain:
+    def __init__(self,search_domain,save_path,show_expired):
+        self.search_domain = search_domain
+        self.save_path = save_path
+        self.show_expired = show_expired
+        self.domains = {}
+        self.page_token = ''
+        self.headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36"}
+        self.indexUrl = 'https://transparencyreport.google.com/transparencyreport/api/v3/httpsreport/ct/certsearch?include_subdomains=true'
+        self.nextUrl = 'https://transparencyreport.google.com/transparencyreport/api/v3/httpsreport/ct/certsearch/page?p='
+        #self.proxies = {
+        #    'http': 'http://127.0.0.1:1087',
+        #    'https': 'http://127.0.0.1:1087',
+        #}
         requests.packages.urllib3.disable_warnings()
 
     def get_domain(self):
-        r = requests.get(self.baseUrl+'&domain='+self.domain+'&token='+self.Token, proxies=self.proxies,verify=False)
-        # print r.text
-        pattern = re.compile(r"jsonp\((.*)\)", re.I|re.X)
-        match = pattern.findall(r.text)
-        obj = json.loads(match[0])
-        self.ds.append(obj['results'])
-        if 'nextPageToken' in obj.keys():
-            self.Token = obj['nextPageToken']
+        if self.page_token != '':
+            req = requests.get(self.nextUrl+self.page_token,headers=self.headers,verify=False)
+        else:
+            if self.show_expired == 'show':
+                req = requests.get(self.indexUrl+'&domain='+self.search_domain+'&include_expired=true',headers=self.headers,verify=False)
+            else:
+                req = requests.get(self.indexUrl+'&domain='+self.search_domain,headers=self.headers,verify=False)
+        rep = (req.text).encode('utf-8').lstrip(")]}'")
+        rep = re.sub(r'\[\[\"https\.ct\.cdsr\"\,','[',rep)
+        rep = rep.replace('\n','').replace('\\','')
+        rep = rep[:-1]
+        rep = json.loads(rep)              
+        for y in rep[0]:
+            if not self.domains.has_key(y[1]):
+                self.domains[y[1]] = {}
+                self.domains[y[1]]['expired_time'] = int((str(y[4]))[:-3])
+                self.domains[y[1]]['is_expired'] = 0
+            else:
+                if self.domains[y[1]]['expired_time'] < int((str(y[4]))[:-3]):
+                    self.domains[y[1]]['expired_time'] = int((str(y[4]))[:-3])
+                    now = time.time()
+                    if now >int((str(y[4]))[:-3]):
+                        self.domains[y[1]]['is_expired'] = 1
+                    else:
+                        self.domains[y[1]]['is_expired'] = 0
+                else:
+                    continue
+        if rep[2][1] != None:
+            self.page_token = rep[2][1]
             self.get_domain()
 
     def list(self):
         try:
-            self.get_domain()
-            x = 0
-            domains = []
-            while (x<len(self.ds)):
-                for y in self.ds[x]:
-                    domains.append(y['subject'])
-                x +=1
-            # remove duplicate
-            domains = list(set(domains))
+           self.get_domain()
+           return self.domains
         except:
-            domains = []
-        return domains
-
-
-
+            self.domains = {}
+            return self.domains
