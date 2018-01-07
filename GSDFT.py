@@ -6,6 +6,9 @@ import requests
 import re
 import json
 import os,cmd,sys
+import argparse
+import time,datetime
+from tqdm import tqdm  
 
 #text highlight
 class Colored(object):
@@ -50,157 +53,114 @@ class Colored(object):
 
 #domainfinde function
 class Domain:
-    def __init__(self,domain,Token):
-        self.domain = domain
-        self.Token = Token
-        self.ds = []
-        self.domains = []
-        self.flag = 0 
-        self.length = 0
+    def __init__(self,search_domain,save_path,show_expired):
+        self.search_domain = search_domain
+        self.save_path = save_path
+        self.show_expired = show_expired
+        self.domains = {}
+        self.total_num = 0
+        self.page_token = ''
+        self.flag = 0
         self.headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36"}
-        self.baseUrl = 'https://www.google.com/transparencyreport/jsonp/ct/search?incl_exp=true&incl_sub=true&c=jsonp'
-        self.proxies = {
-            'http': 'http://127.0.0.1:1087',
-            'https': 'http://127.0.0.1:1087',
-        }
+        self.indexUrl = 'https://transparencyreport.google.com/transparencyreport/api/v3/httpsreport/ct/certsearch?include_subdomains=true'
+        self.nextUrl = 'https://transparencyreport.google.com/transparencyreport/api/v3/httpsreport/ct/certsearch/page?p='
+        #self.proxies = {
+        #    'http': 'http://127.0.0.1:1087',
+        #    'https': 'http://127.0.0.1:1087',
+        #}
         requests.packages.urllib3.disable_warnings()
 
     def get_domain(self):
-        r = requests.get(self.baseUrl+'&domain='+self.domain+'&token='+self.Token,headers=self.headers,proxies=self.proxies,verify=False)
-        # print r.text
-        pattern = re.compile(r"jsonp\((.*)\)", re.I|re.X)
-        match = pattern.findall(r.text)
-        obj = json.loads(match[0])
-        try:
-            if self.flag < 20:
-                self.process(obj['results'])
-                self.flag += 1
-            else:
-                if self.flag == 20:
-                    print "\nOh no,too much subdomains,please give me more patience!"
-                    self.flag +=1
-                else:
-                    pass
-        except:
-            print "something went wrong"
-        self.ds.append(obj['results'])
-        if 'nextPageToken' in obj.keys():
-            self.Token = obj['nextPageToken']
-            self.get_domain()
+        c = Colored()
+        if self.page_token != '':
+            req = requests.get(self.nextUrl+self.page_token,headers=self.headers,verify=False)
         else:
-            c = Colored()
-            print c.green("\nAll done,here are subdomains for "+ self.domain + "\n")
+            if self.show_expired == 'show':
+                req = requests.get(self.indexUrl+'&domain='+self.search_domain+'&include_expired=true',headers=self.headers,verify=False)
+            else:
+                req = requests.get(self.indexUrl+'&domain='+self.search_domain,headers=self.headers,verify=False)
+        rep = (req.text).encode('utf-8').lstrip(")]}'")
+        rep = re.sub(r'\[\[\"https\.ct\.cdsr\"\,','[',rep)
+        rep = rep.replace('\n','').replace('\\','')
+        rep = rep[:-1]
+        rep = json.loads(rep)
+        if self.total_num == 0:
+           for x in rep[1]:
+               self.total_num += x[3]
+           print(c.green("   Found ")+c.red(str(self.total_num))+c.green(" subdomain certificate logs"))
+        for y in rep[0]:
+            if not self.domains.has_key(y[1]):
+                self.domains[y[1]] = {}
+                self.domains[y[1]]['expired_time'] = int((str(y[4]))[:-3])
+                self.domains[y[1]]['is_expired'] = 0
+            else:
+                if self.domains[y[1]]['expired_time'] < int((str(y[4]))[:-3]):
+                    self.domains[y[1]]['expired_time'] = int((str(y[4]))[:-3])
+                    now = time.time()
+                    if now >int((str(y[4]))[:-3]):
+                        self.domains[y[1]]['is_expired'] = 1
+                    else:
+                        self.domains[y[1]]['is_expired'] = 0
+                else:
+                    continue
+        
+        pageNum = (self.total_num/10) + 1
+        with tqdm(total=self.total_num,ncols=80) as pbar:  
+            if self.flag < pageNum:
+               if self.total_num - (self.flag)*10 <10:  
+               	   pbar.update(self.total_num) 
+               else:
+                   pbar.update((self.flag+1)*10)
+                   self.flag = self.flag+1
+        if rep[2][1] != None:
+            self.page_token = rep[2][1]
+            self.get_domain()
 
     def run(self):
-        try:
-            c = Colored()
-            print c.yellow('Processing...,The result may be numerous.so please wait for a while.')
-            self.get_domain()  
-            x = 0
-            while (x<len(self.ds)):
-                for y in self.ds[x]:
-                    self.domains.append(y['subject'])
-                x +=1
-            # Remove duplicates
-            self.domains = list(set(self.domains))   
-            #print self.domains
-            for y in self.domains:
-                print y
-            print c.cyan("\nHere are "+str(len(self.domains))+" subdomains for "+self.domain +"\n")
-            self.log()
-            print c.cyan("subdomains has been saved in directory ./"+self.domain+".txt\n")
-        except KeyboardInterrupt:
-            print "Ctrl-c Pressed，exit..."
-            sys.exit(1)
-        except:
-            print c.red('Sorry,timeout or network is not smooth')
-            
-    def process(self,data):
-        self.length = self.length + len(data)
-        #print self.length
-        print  "["+(self.length//4) * "-" +">" + (50 - self.length//4) * " " + "] " + str(self.length)+"/all done"
-
-    def log(self):
-        # write into txt file
-        if os.path.exists('log') == False:
-            os.mkdir('log')
+        c = Colored()
+        print("[+]Searching subdomains for "+c.cyan(self.search_domain))
+        self.get_domain()  
+        print (c.fuchsia("[+]Printing subdomains for ")+c.cyan(self.search_domain)) 
+        for key,value in self.domains.items():
+            if value['is_expired'] == 1 and self.show_expired == 'show':
+                print(key+"   "+c.red("[Expired on "+datetime.datetime.fromtimestamp(value['expired_time']).strftime('%Y-%m-%d')+"]"))
+            else:
+                print(key)
+        self.write_log()
+    
+    def write_log(self):
+        c = Colored()
         if(os.name == 'posix'):
-            with open(os.getcwd()+"/log/"+self.domain+'.txt', 'wb') as f:
-                for i in self.domains:
-                    f.write(i+'\r\n')
-                    f.flush()
-            f.close()
+            path = os.getcwd()+"/"+self.save_path+"/"
         else:
-            with open(os.getcwd()+"\\log\\"+self.domain+'.txt', 'wb') as f:
-                for i in self.domains:
-                    f.write(i+'\r\n')
-                    f.flush()
-            f.close()
+            path = os.getcwd()+"\\"+self.save_path+"\\"
+        if os.path.exists(path) == False:
+            os.mkdir(path)
+        with open(path+self.search_domain+'.txt', 'wb') as f:
+             for key,value in self.domains.items():
+                 if value['is_expired'] == 1 and self.show_expired == 'show':
+                     f.write(key+"   "+c.red("[Expired on "+datetime.datetime.fromtimestamp(value['expired_time']).strftime('%Y-%m-%d')+"]\r\n"))
+                     f.flush()
+                 else:
+                     f.write(key+"\r\n")
+                     f.flush()
+        print(c.fuchsia("[+]The ")+c.cyan(self.search_domain)+c.fuchsia("'s subdomains have been saved in ")+c.cyan(path+self.search_domain+".txt"))
+        f.close()
 
-#terminal
-class Main(cmd.Cmd):
-    '''
+if '__main__' == __name__:
+    print ('''
     `______`````______`````_____`````______``
     /\``___\```/\``___\```/\``__-.``/\``___\`
     \`\`\__`\``\`\___``\``\`\`\/\`\`\`\``__\`
     `\`\_____\``\/\_____\``\`\____-``\`\_\```
     ``\/_____/```\/_____/```\/____/```\/_/```
     `````````````````````````````````````````
-
-    Author:Wester@Sixtant Security Lab
-
-    How to use:
-
-    [find + domain] - list subdomains
-
-    (example command:find mi.com and you don't need to add http/https)
-
-    [cls] - clear screen
-
-    [help] - open this help
-
-    [exit] - exit program
-    '''
-    def __init__(self):
-        cmd.Cmd.__init__(self)
-        co = Colored()
-        reload(sys)
-        sys.setdefaultencoding('utf-8')
-        self.prompt = co.green("domainfinder =>")
-        self.intro = "Welcome to "+co.fuchsia("GoogleSSLdomainFinder")+"!Please print "+co.red('help')+" to get help,Enjoy!\n"
-    
-    def do_EOF(self, line):
-        return True
-
-    def do_help(self, line):
-        print self.__doc__
-
-    def do_find(self, line):
-        co = Colored()
-        domain = line
-        if domain =='':
-            print co.red('please input domain')
-        elif not re.search(r"^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$", domain):
-            print co.red(''+domain+' is illegal')
-        else:
-            d = Domain(domain,'CAA=')
-            d.run()
-
-    def do_cls(self, line):
-        os.system("clear")
-
-    def do_exit(self,line):
-        sys.exit(-1)
-
-
-
-if '__main__' == __name__:
-    try:
-        os.system("clear")
-        m = Main()
-        m.cmdloop()
-    except KeyboardInterrupt:
-        print "Ctrl-c pressed,exit..."
-        sys.exit(1)
-    except:
-        exit()
+       Author:Wester@Sixtant Security Lab
+    ''')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--domain', dest='search_domain', action='store',required=True,help='The domain you want to search(input example: google.com/twitter.com),no need to add http/https')
+    parser.add_argument('-s', '--save', dest='save_path', action='store', default='log',required=False,help='The folder that subdomains will be saved under current path,(default:log),no need to /')
+    parser.add_argument('-e', '--expired', dest='show_expired', action='store', required=True,help='show the subdomains which have an expired Security certificate(input choices:show/hide)')
+    args = parser.parse_args()
+    d = Domain(args.search_domain, args.save_path,args.show_expired)
+    d.run()
