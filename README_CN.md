@@ -21,7 +21,7 @@
 - 2017.01.05 完成api库，使用方法：
 ```
 from GSDFA import GoogleSSLdomainFinder
-domain = GoogleSSLdomainFinder('chaitin.cn','log','show')
+domain = GoogleSSLdomainFinder('chaitin.cn','show')
 print domain.list()  #输出为字典
 ```
   
