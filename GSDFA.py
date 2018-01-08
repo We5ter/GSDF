@@ -12,9 +12,8 @@ from tqdm import tqdm
 
 #domainfinde function
 class GoogleSSLdomainFinder:
-    def __init__(self,search_domain,save_path,show_expired):
+    def __init__(self,search_domain,show_expired):
         self.search_domain = search_domain
-        self.save_path = save_path
         self.show_expired = show_expired
         self.domains = {}
         self.page_token = ''
