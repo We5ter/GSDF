@@ -19,10 +19,11 @@
 - 2016.12.21 增加文件记录功能
 - 2016.12.22 增加api库
 - 2017.01.05 完成api库，使用方法：
-  <pre><code>from GSDFA import GoogleSSLdomainFinder
-  domain = GoogleSSLdomainFinder('chaitin.cn','log','show')
-  domain.list()  #输出为字典
-  </code></pre>
+```
+from GSDFA import GoogleSSLdomainFinder
+domain = GoogleSSLdomainFinder('chaitin.cn','log','show')
+domain.list()  #输出为字典
+```
   
 - 2017.09.16 更新至v1.1版本
 - 2018.01.07 更新至v2.0版本 （新功能：标记证书已经过期的域名）
