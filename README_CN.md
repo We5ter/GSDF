@@ -22,7 +22,7 @@
 ```
 from GSDFA import GoogleSSLdomainFinder
 domain = GoogleSSLdomainFinder('chaitin.cn','log','show')
-domain.list()  #输出为字典
+print domain.list()  #输出为字典
 ```
   
 - 2017.09.16 更新至v1.1版本
