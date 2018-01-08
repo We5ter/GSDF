@@ -3,6 +3,8 @@
 ![GitHub issues](https://img.shields.io/github/issues/We5ter/GSDF.svg)
 ![GitHub forks](https://img.shields.io/github/forks/We5ter/GSDF.svg)
 ![GitHub stars](https://img.shields.io/github/stars/We5ter/GSDF.svg)
+![GitHub contributors](https://img.shields.io/github/contributors/We5ter/GSDF.svg)
+[![Python 2.7](https://img.shields.io/badge/python-2.7-yellow.svg)](https://www.python.org/) 
 
 **README.md in [English 英文](https://github.com/We5ter/GSDF/blob/master/README.md)**
 
@@ -18,8 +20,8 @@
 - 2016.12.22 增加api库
 - 2017.01.05 完成api库，使用方法：
   <pre><code>from GSDFA import GoogleSSLdomainFinder
-  do = GoogleSSLdomainFinder('mi.com')
-  do.list()  #输出为字典
+  domain = GoogleSSLdomainFinder('chaitin.cn','log','show')
+  domain.list()  #输出为字典
   </code></pre>
   
 - 2017.09.16 更新至v1.1版本
