@@ -25,7 +25,7 @@ domain.list () # output as a dict
 ```
 
 - 2017.09.16 update to v1.1
-- 2018.1.7 update to v2.0 (The original api was closed,so I rewrite this script again)
+- **2018.01.07 update to v2.0 (New feature:Identifies the subdomain which has expired)**
 
 ### Using Instructions
 
