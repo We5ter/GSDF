@@ -21,7 +21,7 @@
 ```
 from GSDFA import GoogleSSLdomainFinder
 domain = GoogleSSLdomainFinder('chaitin.cn','log','show')
-domain.list () # output as a dict
+print domain.list () # output as a dict
 ```
 
 - 2017.09.16 update to v1.1
