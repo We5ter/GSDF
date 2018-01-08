@@ -20,7 +20,7 @@
 - 2017.01.05 complete api library, usage:
 ```
 from GSDFA import GoogleSSLdomainFinder
-domain = GoogleSSLdomainFinder('chaitin.cn','log','show')
+domain = GoogleSSLdomainFinder('chaitin.cn','show')
 print domain.list () # output as a dict
 ```
 
