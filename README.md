@@ -12,7 +12,7 @@
 
 ### Project Description
 
-**GoogleSSLdomainFinder** is a domain scanner based on https://transparencyreport.google.com/https/certificates.
+**GoogleSSLdomainFinder** is a domain searcher based on https://transparencyreport.google.com/https/certificates.
 ### Change records
 
 - 2016.12.21 Increase the file record function
@@ -21,7 +21,7 @@
 ```
 from GSDFA import GoogleSSLdomainFinder
 domain = GoogleSSLdomainFinder('chaitin.cn','show')
-print domain.list () # output as a dict
+print domain.list() # output as a dict
 ```
 
 - 2017.09.16 update to v1.1
