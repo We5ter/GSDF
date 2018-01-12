@@ -144,7 +144,7 @@ class Domain:
         with open(path+self.search_domain+'.txt', 'wb') as f:
              for key,value in self.domains.items():
                  if value['is_expired'] == 1 and self.show_expired == 'show':
-                     f.write(key+"   "+c.red("[Expired on "+datetime.datetime.fromtimestamp(value['expired_time']).strftime('%Y-%m-%d')+"]\r\n"))
+                     f.write(key+"   "+"[Expired on "+datetime.datetime.fromtimestamp(value['expired_time']).strftime('%Y-%m-%d')+"]\r\n")
                      f.flush()
                  else:
                      f.write(key+"\r\n")
