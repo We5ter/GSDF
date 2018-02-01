@@ -4,7 +4,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/We5ter/GSDF.svg)
 ![GitHub stars](https://img.shields.io/github/stars/We5ter/GSDF.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/We5ter/GSDF.svg)
-[![Python 2.7](https://img.shields.io/badge/python-2.7-yellow.svg)](https://www.python.org/) 
+[![Python 2.7](https://img.shields.io/badge/python-2.X-yellow.svg)](https://www.python.org/) 
 
 **README.md in [English 英文](https://github.com/We5ter/GSDF/blob/master/README.md)**
 
@@ -32,7 +32,7 @@ print domain.list()  #输出为字典
 
 #### 使用方法
 
-- 首先确保电脑已经安装上python 2.7或者更高版本
+- 首先确保电脑已经安装上python 2.X(2.7最好);
 - 如果你使用Shadowsocks访问Google，可取消以下几行的注释为并在requests中添加`proxies=self.proxies`：
 
 ```
