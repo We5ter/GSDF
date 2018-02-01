@@ -10,6 +10,8 @@ import argparse
 import time,datetime
 from tqdm import tqdm
 
+sess = requests.Session()
+
 #domainfinde function
 class GoogleSSLdomainFinder:
     def __init__(self,search_domain,show_expired):
@@ -28,12 +30,12 @@ class GoogleSSLdomainFinder:
 
     def get_domain(self):
         if self.page_token != '':
-            req = requests.get(self.nextUrl+self.page_token,headers=self.headers,verify=False)
+            req = sess.get(self.nextUrl+self.page_token,headers=self.headers,verify=False)
         else:
             if self.show_expired == 'show':
-                req = requests.get(self.indexUrl+'&domain='+self.search_domain+'&include_expired=true',headers=self.headers,verify=False)
+                req = sess.get(self.indexUrl+'&domain='+self.search_domain+'&include_expired=true',headers=self.headers,verify=False)
             else:
-                req = requests.get(self.indexUrl+'&domain='+self.search_domain,headers=self.headers,verify=False)
+                req = sess.get(self.indexUrl+'&domain='+self.search_domain,headers=self.headers,verify=False)
         rep = (req.text).encode('utf-8').lstrip(")]}'")
         rep = re.sub(r'\[\[\"https\.ct\.cdsr\"\,','[',rep)
         rep = rep.replace('\n','').replace('\\','')
