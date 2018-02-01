@@ -179,7 +179,8 @@ if '__main__' == __name__:
         except KeyboardInterrupt:
             print(c.red("[+]Ctrl+c exit..."))
             exit()
-        except:
+        except Exception as e:
+            print e
             print(c.red("[+]Error exit..."))
     else:
         print(c.red("[+]argument --domain/-d is illegal!"))
