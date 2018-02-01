@@ -4,7 +4,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/We5ter/GSDF.svg)
 ![GitHub stars](https://img.shields.io/github/stars/We5ter/GSDF.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/We5ter/GSDF.svg)
-[![Python 2.7](https://img.shields.io/badge/python-2.7-yellow.svg)](https://www.python.org/) 
+[![Python 2.7](https://img.shields.io/badge/python-2.X-yellow.svg)](https://www.python.org/) 
 
 **README.md in [Chinese 中文](https://github.com/We5ter/GSDF/blob/master/README_CN.md)**
 
@@ -29,7 +29,7 @@ print domain.list() # output as a dict
 
 ### Using Instructions
 
-- First make sure the computer is already installed on python 2.7 or later;
+- First make sure the computer is already installed on python 2.X(Advice is 2.7);
 - If you use the Shadowsocks to access Google, please cancel the following lines comments and add `proxies=self.proxies` to requests
 ```
 self.proxies = {
